@@ -1,6 +1,7 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const { createPreference } = require("./mercado-pago");
+const { getPublicUrl } = require("./utils");
 
 const port = process.env.PORT || 3000;
 const app = express();
@@ -17,8 +18,27 @@ app.get("/", function (req, res) {
 });
 
 app.get("/detail", function (req, res) {
-  console.log(req.query);
-  res.render("detail", req.query);
+  const product = req.query;
+
+  createPreference([
+    {
+      id: 1234,
+      title: product.title,
+      description: "Celular de Tienda e-commerce",
+      picture_url: getPublicUrl(product.img),
+      quantity: 1,
+      unit_price: Number(product.price),
+      currency_id: "BRL",
+    },
+  ])
+    .then((response) => {
+      res.render("detail", { product, preferenceId: response.body.id });
+    })
+    .catch((error) => {
+      res.status(500).json(error);
+      console.log(error);
+    });
+});
 });
 
 app.listen(port, () => {
