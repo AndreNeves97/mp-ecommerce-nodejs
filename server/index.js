@@ -60,7 +60,7 @@ app.post("/mercado-pago/webhook", (req, res) => {
 
   const payload = req.body;
 
-  if (req.query.topic != "payment.created") {
+  if (req.body.action != "payment.created") {
     return res.status(200).json();
   }
 
