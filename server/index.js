@@ -1,10 +1,13 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
-const { createPreference } = require("./mercado-pago");
+const { createPreference, getPayment } = require("./mercado-pago");
 const { getPublicUrl } = require("./utils");
 
 const port = process.env.PORT || 3000;
 const app = express();
+
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
 
 app.engine("handlebars", exphbs());
 app.set("view engine", "handlebars");
@@ -20,7 +23,10 @@ app.get("/", function (req, res) {
 app.get("/detail", function (req, res) {
   const product = req.query;
 
-  createPreference([
+  console.log("===== SHOW PRODUCT CHECKOUT PAGE =====");
+  console.log(product);
+
+  const products = [
     {
       id: 1234,
       title: product.title,
@@ -30,13 +36,38 @@ app.get("/detail", function (req, res) {
       unit_price: Number(product.price),
       currency_id: "BRL",
     },
-  ])
+  ];
+  const notification_url = getPublicUrl("mercado-pago/webhook");
+
+  createPreference(products, notification_url)
     .then((response) => {
+      console.log("--> Payment preference");
+      console.log(response.body);
       res.render("detail", { product, preferenceId: response.body.id });
     })
     .catch((error) => {
       res.status(500).json(error);
       console.log(error);
+    });
+});
+
+app.post("/mercado-pago/webhook", (req, res) => {
+  console.log("===== WEBHOOK =====");
+  console.log("--> Body");
+  console.log(req.body);
+  console.log("--> Query");
+  console.log(req.query);
+
+  const payload = req.body;
+
+  getPayment(payload.data.id)
+    .then((payment) => {
+      console.log("===== GET PAYMENT =====");
+      console.log(payment);
+      res.status(200).json(payment);
+    })
+    .catch((error) => {
+      res.status(500).json(error);
     });
 });
 

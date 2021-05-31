@@ -7,7 +7,7 @@ mercadopago.configure({
     "APP_USR-334491433003961-030821-12d7475807d694b645722c1946d5ce5a-725736327",
 });
 
-exports.createPreference = (products) => {
+exports.createPreference = (products, notification_url) => {
   let preference = {
     items: products,
     payer: {
@@ -38,10 +38,13 @@ exports.createPreference = (products) => {
       pending: getPublicUrl("purchase-feedback/pending"),
     },
     auto_return: "approved",
-    notification_url:
-      "https://webhook.site/c5742ce1-ca50-46d1-8342-9dbdf01c33a3",
+    notification_url,
     external_reference: "andreneves3@gmail.com",
   };
 
   return mercadopago.preferences.create(preference);
+};
+
+exports.getPayment = (id) => {
+  return mercadopago.payment.get(id);
 };
