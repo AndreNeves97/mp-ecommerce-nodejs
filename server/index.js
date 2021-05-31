@@ -24,7 +24,7 @@ app.get("/detail", function (req, res) {
   const product = req.query;
 
   console.log("===== SHOW PRODUCT CHECKOUT PAGE =====");
-  console.log(product);
+  console.log(JSON.stringify(product));
 
   const products = [
     {
@@ -42,7 +42,7 @@ app.get("/detail", function (req, res) {
   createPreference(products, notification_url)
     .then((response) => {
       console.log("--> Payment preference");
-      console.log(response.body);
+      console.log(JSON.stringify(response.body));
       res.render("detail", { product, preferenceId: response.body.id });
     })
     .catch((error) => {
@@ -54,16 +54,16 @@ app.get("/detail", function (req, res) {
 app.post("/mercado-pago/webhook", (req, res) => {
   console.log("===== WEBHOOK =====");
   console.log("--> Body");
-  console.log(req.body);
+  console.log(JSON.stringify(req.body));
   console.log("--> Query");
-  console.log(req.query);
+  console.log(JSON.stringify(req.query));
 
   const payload = req.body;
 
   getPayment(payload.data.id)
     .then((payment) => {
       console.log("===== GET PAYMENT =====");
-      console.log(payment);
+      console.log(JSON.stringify(payment));
       res.status(200).json(payment);
     })
     .catch((error) => {
