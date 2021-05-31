@@ -15,7 +15,7 @@ function init() {
     },
     render: {
       container: ".mercadopago-button",
-      label: "Pagar",
+      label: "Pague a compra",
     },
   });
 }
