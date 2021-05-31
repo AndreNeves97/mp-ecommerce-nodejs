@@ -1,3 +1,45 @@
+.product-details > div {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.product-details > div > .as-producttile-info {
+    flex: 1
+}
+
+.product-details .as-producttile-info {
+    text-align: center;
+}
+
+.product-details div.mercadopago-button {
+    width: 100%;
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: 20px;
+}
+
+ 
+.product-details div.mercadopago-button button {
+    width: 100%;
+    text-align: center;
+}
+
+
+@media (max-width: 768px) {
+    .product-details > div {
+        flex-direction: column;
+    }
+
+    .product-details .item-image {
+        max-width: 300px;
+    }
+}
+
+
 .payment-feedback {
     max-width: none !important;
     margin: 0 !important;
