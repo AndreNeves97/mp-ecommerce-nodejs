@@ -35,10 +35,27 @@
                     <div class="row as-search-navbar" id="as-search-navbar" style="width: auto;">
                         <div class="as-accessories-filter-tile column {{#if approved}} approved {{/if}} {{#if pending}} pending {{/if}} {{#if rejected}} rejected {{/if}}">
 
-                            <button class="as-filter-button" aria-expanded="true" aria-controls="as-search-filters" type="button">
+                            <div class="as-filter-button" aria-expanded="true" aria-controls="as-search-filters" type="button">
                                 <h2 class=" as-filter-button-text">
                                     {{#if approved}}
-                                        Compra realizada com sucesso!
+                                        Compra realizada com sucesso!<br> <br>
+                                        <div>
+
+                                            collection_id: {{ collection_id }}  <br>
+                                            collection_status: {{ collection_status }}  <br>
+                                            payment_id: {{ payment_id }}  <br>
+                                            status: {{ status }}  <br>
+                                            external_reference: {{ external_reference }} <br>
+                                            payment_type: {{ payment_type }}  <br>
+                                            merchant_order_id: {{ merchant_order_id }}  <br>
+                                            preference_id: {{ preference_id }}  <br>
+                                            site_id: {{ site_id }}  <br>
+                                            processing_mode: {{ processing_mode }}  <br>
+                                            merchant_account_id: {{ merchant_account_id }}  <br>
+
+                                        </div>
+
+
                                     {{/if}}
 
                                     {{#if pending}}
@@ -50,7 +67,7 @@
                                     {{/if}}
 
                                 </h2>
-                            </button>
+                            </div>
                             <a href="/"  class="back-button">Voltar para a loja</a>
 
 

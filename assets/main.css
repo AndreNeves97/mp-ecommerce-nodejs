@@ -64,6 +64,7 @@
 
 .payment-feedback .as-accessories-filter-tile,
 .payment-feedback .as-accessories-filter-tile .as-filter-button {
+    cursor: auto;
     width: 100%;
     margin: 0;
     padding: 50px 0;
@@ -73,6 +74,11 @@
 .payment-feedback h2 {
     text-align: center;
     color: white;
+}
+
+
+.payment-feedback h2 > div {
+    text-align: left;
 }
 
 
