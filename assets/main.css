@@ -1,0 +1,52 @@
+.payment-feedback {
+    max-width: none !important;
+    margin: 0 !important;
+}
+
+
+.payment-feedback .as-search-navbar {
+    padding: 0 !important;
+}
+
+.payment-feedback .as-accessories-filter-tile.approved {
+    background: #26b36a;
+}
+
+.payment-feedback .as-accessories-filter-tile.rejected {
+    background: #f23d4f;
+}
+
+.payment-feedback .as-accessories-filter-tile.pending {
+    background: #f73;
+}
+
+.payment-feedback .as-accessories-filter-tile,
+.payment-feedback .as-accessories-filter-tile .as-filter-button {
+    width: 100%;
+    margin: 0;
+    padding: 50px 0;
+}
+
+
+.payment-feedback h2 {
+    text-align: center;
+    color: white;
+}
+
+
+.payment-feedback .as-accessories-filter-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+    margin: 34px 0;
+}
+
+.payment-feedback .as-accessories-filter-tile .back-button {
+    color: white;
+    font-size: 21px;
+    padding: 10px 28px;
+    border: 1px solid white;
+    border-radius: 6px;
+    text-decoration: none;
+}

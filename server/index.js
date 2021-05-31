@@ -39,7 +39,25 @@ app.get("/detail", function (req, res) {
       console.log(error);
     });
 });
-});
+
+app.get("/purchase-feedback/success", purchaseFeedback);
+app.get("/purchase-feedback/failure", purchaseFeedback);
+app.get("/purchase-feedback/pending", purchaseFeedback);
+
+function purchaseFeedback(req, res) {
+  const payload = req.query;
+
+  if (payload.status === "null") {
+    return res.redirect("/");
+  }
+
+  res.render("feedback", {
+    ...payload,
+    approved: payload.status === "approved",
+    pending: payload.status === "pending" || payload.status === "in_process",
+    rejected: payload.status === "rejected",
+  });
+}
 
 app.listen(port, () => {
   console.log(`The server is now running on Port ${port}`);
